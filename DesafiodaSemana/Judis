@@ -1,0 +1,131 @@
+// Trabalho:
+
+// 1) Crie uma classe `Cachorro` com atributos `nome` e `raca`. Adicione um método `latir()` que imprime "Por favor, faz carinho.".
+// 2) Crie uma classe `Pessoa` com atributos `nome` e `idade` e adicione um método `apertarMao()` (com outra Pessoa como argumento do método).
+// 3) Instancie 1 Cachorro e faça-o "latir" pelo menos 1 vez.
+// 4) Instancie pelo menos 3 Pessoa. Faça cada uma se cumprimentar entre si.
+
+// class Cachorro{
+   
+
+//     constructor( private nome : string,
+//     private raca : string){}
+
+//     latir(){
+//         console.log(`${this.nome} diz: Por favor, faz carinho. `);
+//     }
+
+// }
+
+// class Pessoa{
+//     constructor(private nome: string, private idade: number){}
+
+//     apertarMao(dePessoa : Pessoa){
+//         console.log(`${this.nome} apertou a mão de ${dePessoa.nome}`)
+//     }
+// }
+
+// let cachorro = new Cachorro("Erwin Schrödinger", "Bull terrier");
+// cachorro.latir()
+
+
+// let pe1 = new Pessoa("Carlos", 12);
+// let pe2 = new Pessoa("Lea", 12);
+// let pe3 = new Pessoa("Carla", 12);
+
+// pe1.apertarMao(pe2);
+// pe1.apertarMao(pe3);
+// pe2.apertarMao(pe3);
+
+
+
+class NumerosPrimos{
+
+    constructor(private _numberP? : number, private _numNprimo? : number){
+        if(this.veryPrim(this._numberP)){
+            this._numNprimo = _numberP;
+            this._numberP = undefined;
+        } else {
+            this._numberP = _numberP;
+        }
+
+    }
+
+    get numberP () : number  | undefined {
+        return this._numberP
+    }
+
+    get numNP () : number | undefined {
+        return this._numNprimo
+    }
+
+    set numberP (valor: number) {
+        if(this.veryPrim(valor)){
+            this._numNprimo = valor;
+            this._numberP = undefined;
+        } else {
+           this._numberP = valor;
+        }
+    }
+
+    set numNP (valor: number) {
+        if(this.veryPrim(valor)){
+            this._numNprimo = valor;
+            this._numberP = undefined;
+        } else {
+           this._numberP = valor;
+        }
+    }
+
+
+    public veryPrim(num?: number){
+        if(num != null){
+            for(let i = 2; i < num; i++){
+                if(num % i == 0){
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+
+}
+
+class Fatorar{
+
+    public listaFatorada : number[] = []
+
+    constructor(private numeroFatorado : NumerosPrimos){
+        if(this.numeroFatorado.numNP != null){
+            this.fatorar(this.numeroFatorado.numNP);
+        }
+    }
+
+    private fatorar(num : number){
+        for(let i = 2; i < num;){
+            if(num % i != 0){
+                i++;
+            }
+            else{
+                if(this.numeroFatorado.veryPrim(i)){
+                    this.listaFatorada.push(i);
+                }
+                i++;
+            }
+
+        }
+    }
+    
+}
+
+
+let num1 : NumerosPrimos = new NumerosPrimos();
+
+num1.numNP = 100
+
+let f1 = new Fatorar(num1)
+
+console.log(f1.listaFatorada)
+
+console.log(num1.numberP, num1.numNP)
